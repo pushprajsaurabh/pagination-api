@@ -14,7 +14,7 @@ class StatesService
   #
   # @return [Array] An array of states of U.S.A.
   def paginated_list
-    @all_states = $us_states.split(',')
+    @all_states = $us_states.split(',').map(& :strip).try(:sort)
     to_drop = (current_page - 1) * per_page
     data = @all_states.drop(to_drop)[0..(per_page - 1)]
     message = data.present? ? 'States successfully fetched' : 'No data exists for this page'
