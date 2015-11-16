@@ -18,8 +18,8 @@ module Api
       #
       # @return [Hash] A paginated response with payload and meta.
       def index
-        param! :per_page, Integer, default: 10, max: 50
-        param! :page, Integer, default: 1
+        param! :per_page, Integer, default: 10, max: 50, min: 1
+        param! :page, Integer, default: 1, min: 1
         response = StatesService.new(params[:per_page], params[:page]).paginated_list
         render json: {
           payload: response[:payload],
